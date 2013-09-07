@@ -47,7 +47,7 @@ public class Crawler {
 
 			public void onStatus(Status status) {
 				String lang = status.getUser().getLang();
-				if (tweetCount < 1000) {
+				if (tweetCount < 50000) {
 					if (lang.equals("en")) {
 						storeInFile(status);
 						tweetCount++;
