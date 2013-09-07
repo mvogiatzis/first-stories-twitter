@@ -17,7 +17,6 @@ import entities.Tweet;
 
 /**
  *
- * @author michael
  */
 public class TweetBuilder implements Serializable{
 

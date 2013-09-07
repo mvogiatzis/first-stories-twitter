@@ -41,6 +41,9 @@ import twitter4j.Status;
 import twitter4j.TwitterException;
 import twitter4j.json.DataObjectFactory;
 
+/**
+ * Main class to run FSD
+ */
 public class FirstStoryDetection {
 
 	public final static String TOPOLOGY_NAME = "fsd";

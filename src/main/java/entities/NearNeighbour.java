@@ -9,7 +9,6 @@ import java.io.Serializable;
 
 /**
  *
- * @author Mixos
  */
 public class NearNeighbour implements Serializable{
     private double cosineSim;

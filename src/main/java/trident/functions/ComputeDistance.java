@@ -17,7 +17,6 @@ import entities.Tweet;
  */
 public class ComputeDistance implements Function{
 
-//	 NearNeighbour closestNN;
 	 Tools tools;
 	@Override
 	public void prepare(Map conf, TridentOperationContext context) {

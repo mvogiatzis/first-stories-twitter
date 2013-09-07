@@ -9,7 +9,6 @@ import java.io.Serializable;
 
 /**
  *
- * @author Mixos
  */
 public class Tweet implements Serializable{
     private long ID;

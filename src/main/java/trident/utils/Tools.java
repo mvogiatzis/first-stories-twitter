@@ -23,8 +23,7 @@ import entities.SparseVector;
 import entities.Tweet;
 
 /**
- *
- * @author Mixos
+ * Utils class.
  */
 public class Tools implements Serializable{
     
