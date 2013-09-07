@@ -27,7 +27,7 @@ How to run
 
 This project uses Maven to build and run. Install Maven (preferably version 3.x) by following the [Maven installation instructions](http://maven.apache.org/download.cgi).
 
-Tweets.txt is just a sample file, you should run the crawler first and gather a number of tweets to process. Alternatively you can connect a Twitter spout similar to [this](https://github.com/mvogiatzis/storm-unshortening/blob/master/src/main/java/spouts/TwitterSpout.java).
+Tweets.txt is just a sample file, you should run the crawler first and gather a number of tweets to process. You need to fill in the twitter4j.properties file with your own credentials. You can also connect a Twitter spout similar to [this](https://github.com/mvogiatzis/storm-unshortening/blob/master/src/main/java/spouts/TwitterSpout.java) instead of reading from a file.
 
 **To run the tweets crawler** type the following in the command line:
 `mvn compile exec:java -Dexec.classpathScope=compile -Dexec.mainClass=crawler.Crawler`
@@ -40,7 +40,7 @@ Tweets.txt is just a sample file, you should run the crawler first and gather a 
 This will package your code into a jar at the path `target/First-Story-Detection-{version}-jar-with-dependencies.jar.`  
 Then you can submit your jar to the cluster using the `storm` client:  
 `storm jar target/First-Story-Detection-1.0-SNAPSHOT-jar-with-dependencies.jar  
- trident.FirstStoryDetection fsd`  
+trident.FirstStoryDetection fsd`  
 
 Please note that in the production cluster mode, you require a `DRPCClient` to feed the topology with tweets and get results.
 
