@@ -27,7 +27,7 @@ How to run
 
 This project uses Maven to build and run. Install Maven (preferably version 3.x) by following the [Maven installation instructions](http://maven.apache.org/download.cgi).
 
-Tweets.txt is just a sample file, you should run the crawler first and gather a number of tweets to process. You need to fill in the twitter4j.properties file with your own credentials. You can also connect a Twitter spout similar to [this](https://github.com/mvogiatzis/storm-unshortening/blob/master/src/main/java/spouts/TwitterSpout.java) instead of reading from a file.
+Tweets.txt is just a sample file, you should run the crawler first and gather a number of tweets to process. You need to fill in the twitter4j.properties file with your own credentials. You can also connect a Twitter spout similar to [this](https://github.com/mvogiatzis/storm-unshortening/blob/master/src/main/java/spouts/TwitterSpout.java) instead of reading off a file.
 
 **To run the tweets crawler** type the following in the command line:
 `mvn compile exec:java -Dexec.classpathScope=compile -Dexec.mainClass=crawler.Crawler`
