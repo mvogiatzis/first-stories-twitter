@@ -24,9 +24,13 @@ Storm is a distributed real-time computation system which can guarantee data pro
 
 How to run
 ---------------
-Tweets.txt is just a sample file, you should run the crawler first and gather a number of tweets to process. Alternatively you can connect a Twitter spout similar to this and process the tweets in real-time. To run the crawler:
 
 This project uses Maven to build and run. Install Maven (preferably version 3.x) by following the [Maven installation instructions](http://maven.apache.org/download.cgi).
+
+Tweets.txt is just a sample file, you should run the crawler first and gather a number of tweets to process. Alternatively you can connect a Twitter spout similar to $
+
+**To run the tweets crawler** type the following in the command line:
+`mvn compile exec:java -Dexec.classpathScope=compile -Dexec.mainClass=crawler.Crawler`
 
 **To compile and run the project in local mode**, type the following command while being on the project root directory  
 `mvn compile exec:java -Dexec.classpathScope=compile -Dexec.mainClass=trident.FirstStoryDetection`
@@ -39,10 +43,6 @@ Then you can submit your jar to the cluster using the `storm` client:
 
 Please note that in the production cluster mode, you require a `DRPCClient` to feed the topology with tweets and get results.
 
-**To run the tweets crawler** type the following in the command line:  
-`mvn compile exec:java -Dexec.classpathScope=compile -Dexec.mainClass=crawler.Crawler`
-
-
 Authors
 ======
 * Michael Vogiatzis ([@mvogiatzis](https://twitter.com/mvogiatzis))
@@ -50,7 +50,7 @@ Authors
 Contributing
 ------------------
 Have you found any issues?  
-Are there any features you want to improve (english crawler)? Even documentation or testing.
+Are there any features you want to improve (e.g. english crawler)? Even documentation or testing.
   
 Please contact me at [michael@micvog.com](mailto:michael@micvog.com) or create a new Issue. Pull requests are always welcome. 
 
