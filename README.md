@@ -1,7 +1,7 @@
 First Story Detection on Twitter using Storm
 ================================
 
-*You can find a detailed description of the code logic at [this blogpost](http://needsLinkhere.com).*
+*You can find a detailed description of the code logic at [this blogpost](http://micvog.com/2013/09/07/storm-first-story-detection/).*
 
 This project tries to detect first stories (a.k.a new events) on Twitter as they happen.
 
@@ -50,12 +50,12 @@ Authors
 Contributing
 ------------------
 Have you found any issues?  
-Are there any features you want to improve? Even documentation or testing.
+Are there any features you want to improve (english crawler)? Even documentation or testing.
   
 Please contact me at [michael@micvog.com](mailto:michael@micvog.com) or create a new Issue. Pull requests are always welcome. 
 
 License
 ======
 Copyright © 2013 Michael Vogiatzis  
-See [License](needs link here) for licensing information
+See [License](https://github.com/mvogiatzis/first-stories-twitter/blob/master/LICENSE) for licensing information
 
