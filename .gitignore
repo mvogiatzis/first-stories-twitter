@@ -1,0 +1,9 @@
+/target
+*.jar
+*.class
+twitter4j.properties
+results.txt
+.project
+.settings
+.classpath
+
