@@ -13,7 +13,7 @@ Upon a new tweet arrival, the tweet text is split into words and represented int
 
 Documentation
 ----------------------
-Algorithm's explanation and the code logic can be found on the [wiki](needs links here).
+Algorithm's explanation and the code logic can be found on the [wiki](https://github.com/mvogiatzis/first-stories-twitter/wiki).
 
 Storm
 --------
