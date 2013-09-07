@@ -39,7 +39,8 @@ Tweets.txt is just a sample file, you should run the crawler first and gather a 
 `mvn package`.  
 This will package your code into a jar at the path `target/First-Story-Detection-{version}-jar-with-dependencies.jar.`  
 Then you can submit your jar to the cluster using the `storm` client:  
-`storm jar target/First-Story-Detection-1.0-SNAPSHOT-jar-with-dependencies.jar trident.FirstStoryDetection fsd`  
+`storm jar target/First-Story-Detection-1.0-SNAPSHOT-jar-with-dependencies.jar  
+ trident.FirstStoryDetection fsd`  
 
 Please note that in the production cluster mode, you require a `DRPCClient` to feed the topology with tweets and get results.
 
