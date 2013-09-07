@@ -13,7 +13,7 @@ Upon a new tweet arrival, the tweet text is split into words and represented int
 
 Documentation
 ----------------------
-Algorithm's explanation and the code logic can be found on the [wiki](https://github.com/mvogiatzis/first-stories-twitter/wiki).
+Algorithm's explanation and the code logic can be found on the [wiki](https://github.com/mvogiatzis/first-stories-twitter/wiki/_pages).
 
 Storm
 --------
@@ -27,7 +27,7 @@ How to run
 
 This project uses Maven to build and run. Install Maven (preferably version 3.x) by following the [Maven installation instructions](http://maven.apache.org/download.cgi).
 
-Tweets.txt is just a sample file, you should run the crawler first and gather a number of tweets to process. Alternatively you can connect a Twitter spout similar to $
+Tweets.txt is just a sample file, you should run the crawler first and gather a number of tweets to process. Alternatively you can connect a Twitter spout similar to [this](https://github.com/mvogiatzis/storm-unshortening/blob/master/src/main/java/spouts/TwitterSpout.java).
 
 **To run the tweets crawler** type the following in the command line:
 `mvn compile exec:java -Dexec.classpathScope=compile -Dexec.mainClass=crawler.Crawler`
