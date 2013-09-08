@@ -1,7 +1,7 @@
 First Story Detection on Twitter using Storm
 ================================
 
-*You can find a detailed description of the code logic at [this blogpost](http://micvog.com/2013/09/07/storm-first-story-detection/).*
+*You can find a detailed description of the code logic at [this blogpost](http://micvog.com/2013/09/08/storm-first-story-detection/).*
 
 This project tries to detect first stories (a.k.a new events) on Twitter as they happen.
 
@@ -9,7 +9,7 @@ Every day, thousands of posts share information about news, events, automatic up
 
 Implementation summary
 ------------------------------------
-Upon a new tweet arrival, the tweet text is split into words and represented into the vector space. Then it is compared with the N tweets it is most likely to be similar to, using a method called [Locality Sensitive Hashing](http://en.wikipedia.org/wiki/Locality-sensitive_hashing). This data clustering method dramatically reduces the number of comparisons the tweet will need to find the N nearest neighbors and will be explained in detail later below. Having computed the distances with all near neighbor candidates, the tweet with the closest distance is assigned as the nearest. If the distance is above a certain threshold, the new tweet is considered a first story. A detailed version of the summary above will follow in the description of the bolts which act as the logical units of the application.
+Upon a new tweet arrival, the tweet text is split into words and represented into the vector space. Then it is compared with the N tweets it is most likely to be similar to, using a method called [Locality Sensitive Hashing](http://en.wikipedia.org/wiki/Locality-sensitive_hashing). This data clustering method is used because it dramatically reduces the number of comparisons the tweet will need to find the N nearest neighbors and will be explained in detail later below. Having computed the distances with all near neighbor candidates, the tweet with the closest distance is assigned as the nearest. If the distance is above a certain threshold, the new tweet is considered a first story. A detailed version of the summary above will follow in the description of the bolts which act as the logical units of the application.
 
 Documentation
 ----------------------
