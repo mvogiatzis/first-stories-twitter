@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -8,11 +9,11 @@ import java.util.HashMap;
 public class Bucket implements Serializable{
 
     private int queueSize;
-    private HashMap<Integer, ArrayList<Tweet>> hashTable;
+    private HashMap<Integer, ArrayDeque<Tweet>> hashTable;
 
     public Bucket(int queueSize, int numOfMaxSmallHashes)
     {
-        hashTable = new HashMap<Integer, ArrayList<Tweet>>(numOfMaxSmallHashes);
+        hashTable = new HashMap<Integer, ArrayDeque<Tweet>>(numOfMaxSmallHashes);
         this.queueSize = queueSize;
     }
 
@@ -26,7 +27,7 @@ public class Bucket implements Serializable{
         return hashTable.containsKey(hash);
     }
 
-    public ArrayList<Tweet> getCollidingTweets(int hash)
+    public ArrayDeque<Tweet> getCollidingTweets(int hash)
     {
         return hashTable.get(hash);
     }
@@ -52,26 +53,26 @@ public class Bucket implements Serializable{
      */
     private void addToCollidingTweets(int smallHash, Tweet tweet)
     {
-        ArrayList<Tweet> tweetList = getCollidingTweets(smallHash);
+    	ArrayDeque<Tweet> tweetList = getCollidingTweets(smallHash);
         if (!isArrayListFull(tweetList))
         {
-            getCollidingTweets(smallHash).add(tweet);
+            getCollidingTweets(smallHash).offer(tweet);
         }
         else
         {
-            getCollidingTweets(smallHash).remove(0);
-            getCollidingTweets(smallHash).add(tweet);
+            getCollidingTweets(smallHash).poll();
+            getCollidingTweets(smallHash).offer(tweet);
         }
     }
 
-    private boolean isArrayListFull(ArrayList<Tweet> queue)
+    private boolean isArrayListFull(ArrayDeque<Tweet> queue)
     {
         return (queue.size()==queueSize);
     }
 
     private void putNewPair(int smallHashToAdd, Tweet tweet)
     {
-        ArrayList<Tweet> arr = new ArrayList<Tweet>(queueSize);
+    	ArrayDeque<Tweet> arr = new ArrayDeque<Tweet>(queueSize);
         arr.add(tweet);
         hashTable.put(smallHashToAdd, arr);
     }
@@ -81,7 +82,7 @@ public class Bucket implements Serializable{
         return hashTable.size();
     }
 
-    public Collection<ArrayList<Tweet>> getListOfQueues()
+    public Collection<ArrayDeque<Tweet>> getListOfQueues()
     {
         return hashTable.values();
     }

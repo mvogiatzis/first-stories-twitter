@@ -1,6 +1,7 @@
 package trident.state;
 
 import java.io.Serializable;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -149,7 +150,7 @@ public class BucketsDB implements State, Serializable{
      */
     private ArrayList<Tweet> findPossibleNeighbours(Integer smallHash, Bucket bck) {
         ArrayList<Tweet> possibleNeighbors = new ArrayList<Tweet>(); //helps not to null pointer exception
-        ArrayList<Tweet> temp = bck.getCollidingTweets(smallHash);
+        ArrayDeque<Tweet> temp = bck.getCollidingTweets(smallHash);
         if (temp != null) {
             possibleNeighbors.addAll(temp);
         }
