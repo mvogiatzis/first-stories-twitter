@@ -32,7 +32,8 @@ Tweets.txt is just a sample file, you should run the crawler first and gather a 
 **To run the tweets crawler** type the following in the command line:
 `mvn compile exec:java -Dexec.classpathScope=compile -Dexec.mainClass=crawler.Crawler`
 
-**To compile and run the project in local mode**, type the following command while being on the project root directory  
+**To compile and run the project in local mode**, type the following commands while being on the project root directory  
+`mvn package`  
 `mvn compile exec:java -Dexec.classpathScope=compile -Dexec.mainClass=trident.FirstStoryDetection`
 
 **To run in production cluster**, first package the code into a jar by running  
