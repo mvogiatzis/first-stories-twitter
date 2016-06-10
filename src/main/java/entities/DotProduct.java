@@ -4,7 +4,6 @@ package entities;
  * The Class DotProduct.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class DotProduct {
 

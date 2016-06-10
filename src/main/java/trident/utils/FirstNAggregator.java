@@ -11,7 +11,6 @@ import org.apache.storm.trident.tuple.TridentTuple;
  * Sorts the incoming tuples on the sort field.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class FirstNAggregator extends BaseAggregator<PriorityQueue> {
 

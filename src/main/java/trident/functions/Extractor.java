@@ -11,7 +11,6 @@ import org.apache.storm.tuple.Values;
  * Extracts the information from the NearNeighbour object and emits them.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class Extractor extends BaseFunction {
 

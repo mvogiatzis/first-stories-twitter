@@ -10,7 +10,6 @@ import entities.Tweet;
  * Decides whether the closest tweet comes from bucket or most recently seen tweets and emits the result.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class Decider implements CombinerAggregator<NearNeighbour> {
 

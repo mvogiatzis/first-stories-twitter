@@ -16,7 +16,6 @@ import trident.state.BucketsDB;
  * Holds the state for a number of buckets. Each bucket will return near neighbours that their hash collide with the tweet in question.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class BucketsStateQuery extends BaseQueryFunction<BucketsDB, ArrayList<Tweet>> {
 

@@ -19,7 +19,6 @@ import entities.Tweet;
  * The Class VectorBuilderTest.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class VectorBuilderTest extends TestCase {
 

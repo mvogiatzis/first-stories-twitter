@@ -20,7 +20,6 @@ import entities.Tweet;
  * This is responsible for converting the tweet object into a sparse vector based on previously seen terms.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class VectorBuilder implements Function {
 

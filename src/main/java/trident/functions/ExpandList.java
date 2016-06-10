@@ -13,7 +13,6 @@ import entities.Tweet;
  * The Class ExpandList.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class ExpandList extends BaseFunction {
 

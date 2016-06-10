@@ -24,7 +24,6 @@ import twitter4j.conf.ConfigurationBuilder;
  * Receives tweets from Twitter streaming API. You need to pass the right parameters in the config.properties file.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  *
  */
 public class Crawler {

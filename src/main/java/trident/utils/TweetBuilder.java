@@ -13,7 +13,6 @@ import entities.Tweet;
  * The Class TweetBuilder.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class TweetBuilder implements Serializable {
 

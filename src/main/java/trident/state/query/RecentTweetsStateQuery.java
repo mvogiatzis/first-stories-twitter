@@ -19,7 +19,6 @@ import entities.Tweet;
  * Keeps the N most recent tweets and compares the tweet in question if the cosine similarity from buckets is lower than a given threshold.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class RecentTweetsStateQuery implements QueryFunction<RecentTweetsDB, NearNeighbour> {
 

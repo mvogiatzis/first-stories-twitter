@@ -15,7 +15,6 @@ import org.apache.storm.tuple.Values;
  * Not only Count aggregator but also keeps the input Fields.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class CountAggKeep implements Aggregator<CountAggKeep.State> {
 

@@ -6,7 +6,6 @@ import java.io.Serializable;
  * The Class Tweet.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class Tweet implements Serializable {
 

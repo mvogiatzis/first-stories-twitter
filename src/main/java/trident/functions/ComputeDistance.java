@@ -16,7 +16,6 @@ import entities.Tweet;
  * Computes the cosine similarity between two tweets and emits the value.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class ComputeDistance implements Function {
 

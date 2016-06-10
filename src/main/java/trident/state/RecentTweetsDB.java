@@ -12,7 +12,6 @@ import entities.Tweet;
  * The Class RecentTweetsDB.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class RecentTweetsDB implements State, Serializable {
 

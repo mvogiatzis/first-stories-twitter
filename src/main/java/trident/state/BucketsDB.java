@@ -17,7 +17,6 @@ import entities.Tweet;
  * Holds a list of buckets and a list of random vectors.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class BucketsDB implements State, Serializable {
 

@@ -20,7 +20,6 @@ import entities.Tweet;
  * Processes the tweet text to remove whitespaces, links and replies.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class TextProcessor extends BaseFunction {
 

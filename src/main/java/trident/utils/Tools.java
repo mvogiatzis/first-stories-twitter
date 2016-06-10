@@ -26,7 +26,6 @@ import entities.Tweet;
  * Utils class
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com).
  */
 public class Tools implements Serializable {
 

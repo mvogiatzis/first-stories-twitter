@@ -9,7 +9,6 @@ import java.util.HashMap;
  * The Class Bucket.
  * 
  * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
- * @author Quentin Le Sceller (q.lesceller@gmail.com)
  */
 public class Bucket implements Serializable {
 
