@@ -4,75 +4,101 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import storm.trident.operation.TridentCollector;
-import storm.trident.operation.TridentOperationContext;
-import storm.trident.state.QueryFunction;
-import storm.trident.tuple.TridentTuple;
+import org.apache.storm.trident.operation.TridentCollector;
+import org.apache.storm.trident.operation.TridentOperationContext;
+import org.apache.storm.trident.state.QueryFunction;
+import org.apache.storm.trident.tuple.TridentTuple;
+import org.apache.storm.tuple.Values;
+
 import trident.state.RecentTweetsDB;
-import backtype.storm.tuple.Values;
+
 import entities.NearNeighbour;
 import entities.Tweet;
 
 /**
- * Keeps the N most recent tweets and compares the tweet in question if
- * the cosine similarity from buckets is lower than a given threshold.
- *
+ * Keeps the N most recent tweets and compares the tweet in question if the cosine similarity from buckets is lower than a given threshold.
+ * 
+ * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
  */
-public class RecentTweetsStateQuery implements
-		QueryFunction<RecentTweetsDB, NearNeighbour> {
+public class RecentTweetsStateQuery implements QueryFunction<RecentTweetsDB, NearNeighbour> {
 
-	private int partitionNum, numPartitions, myturn;
-	private double threshold;
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 4227776035832647442L;
 
-	@Override
-	public void prepare(Map conf, TridentOperationContext context) {
-		partitionNum = context.getPartitionIndex();
-		numPartitions = context.numPartitions();
-		myturn = partitionNum;
-		threshold = Double.valueOf((String) conf.get("THRESHOLD"));
-	}
+    /** The myturn. */
+    private int partitionNum, numPartitions, myturn;
 
-	@Override
-	public List<NearNeighbour> batchRetrieve(RecentTweetsDB state,
-			List<TridentTuple> args) {
-		List<NearNeighbour> tweets = new ArrayList<NearNeighbour>();
-		for (TridentTuple tuple : args) {
-			Tweet tw = (Tweet) tuple.getValueByField("tweet_obj");
-			double cosSimBuckets = tuple.getDoubleByField("cosSimBckts");
+    /** The threshold. */
+    private double threshold;
 
-			NearNeighbour closestNeighbour = null;
-			// check if comparisons are needed and iterate over all recent
-			// tweets and find the closest
-			if (cosSimBuckets <= threshold)
-				closestNeighbour = state.getClosestNeighbour(tw);
-			// else a close enough tweet has been found in the buckets
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.apache.storm.trident.operation.Operation#prepare(java.util.Map, org.apache.storm.trident.operation.TridentOperationContext)
+     */
+    @Override
+    public void prepare(Map conf, TridentOperationContext context) {
+        partitionNum = context.getPartitionIndex();
+        numPartitions = context.numPartitions();
+        myturn = partitionNum;
+        threshold = Double.valueOf((String) conf.get("THRESHOLD"));
+    }
 
-			tweets.add(closestNeighbour);
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.apache.storm.trident.state.QueryFunction#batchRetrieve(org.apache.storm.trident.state.State, java.util.List)
+     */
+    @Override
+    public List<NearNeighbour> batchRetrieve(RecentTweetsDB state, List<TridentTuple> args) {
+        List<NearNeighbour> tweets = new ArrayList<NearNeighbour>();
+        for (TridentTuple tuple : args) {
+            Tweet tw = (Tweet) tuple.getValueByField("tweet_obj");
+            double cosSimBuckets = tuple.getDoubleByField("cosSimBckts");
 
-			//not every tweet should be inserted into the most recent tweets of each state
-			//Insert in all partitions in a round-robin fashion
-			//we sacrifice fault-tolerance here. If a partition fails and recovers, 
-			//two partitions may insert at the same time
-			myturn++;
-			if (myturn == numPartitions) {
-				state.insert(tw);
-				myturn = 0;
-			}
-		}
+            NearNeighbour closestNeighbour = null;
+            // check if comparisons are needed and iterate over all recent
+            // tweets and find the closest
+            if (cosSimBuckets <= threshold)
+                closestNeighbour = state.getClosestNeighbour(tw);
+            // else a close enough tweet has been found in the buckets
 
-		return tweets;
-	}
+            tweets.add(closestNeighbour);
 
-	@Override
-	public void execute(TridentTuple tuple, NearNeighbour closestNeighbor,
-			TridentCollector collector) {
-		collector.emit(new Values(closestNeighbor));
-	}
+            // not every tweet should be inserted into the most recent tweets of each state
+            // Insert in all partitions in a round-robin fashion
+            // we sacrifice fault-tolerance here. If a partition fails and recovers,
+            // two partitions may insert at the same time
+            myturn++;
+            if (myturn == numPartitions) {
+                state.insert(tw);
+                myturn = 0;
+            }
+        }
 
-	@Override
-	public void cleanup() {
-		// TODO Auto-generated method stub
+        return tweets;
+    }
 
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.apache.storm.trident.state.QueryFunction#execute(org.apache.storm.trident.tuple.TridentTuple, java.lang.Object,
+     * org.apache.storm.trident.operation.TridentCollector)
+     */
+    @Override
+    public void execute(TridentTuple tuple, NearNeighbour closestNeighbor, TridentCollector collector) {
+        collector.emit(new Values(closestNeighbor));
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.apache.storm.trident.operation.Operation#cleanup()
+     */
+    @Override
+    public void cleanup() {
+        // TODO Auto-generated method stub
+
+    }
 
 }

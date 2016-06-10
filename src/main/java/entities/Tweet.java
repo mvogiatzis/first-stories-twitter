@@ -1,77 +1,115 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package entities;
 
 import java.io.Serializable;
 
 /**
- *
+ * The Class Tweet.
+ * 
+ * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
  */
-public class Tweet implements Serializable{
-    private long ID;
-    private String body;
-    private SparseVector vector;
-    //private long timestamp;
+public class Tweet implements Serializable {
 
-    public Tweet(long tweetID, String body)
-    {
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = -5323477461801836101L;
+
+    /** The id. */
+    private long ID;
+
+    /** The body. */
+    private String body;
+
+    /** The vector. */
+    private SparseVector vector;
+
+    /**
+     * Instantiates a new tweet.
+     *
+     * @param tweetID
+     *            the tweet id
+     * @param body
+     *            the body
+     */
+    public Tweet(long tweetID, String body) {
         this.body = body;
-        //this.timestamp = timestamp;
+
         this.vector = null;
         ID = tweetID;
     }
-    
-    public Tweet(long tweetId)
-    {
+
+    /**
+     * Instantiates a new tweet.
+     *
+     * @param tweetId
+     *            the tweet id
+     */
+    public Tweet(long tweetId) {
         this.vector = null;
         ID = tweetId;
     }
 
-//    public Tweet()
-//    {
-//
-//    }
-
-
-    public void setSparseVector(SparseVector sparseV)
-    {
+    /**
+     * Sets the sparse vector.
+     *
+     * @param sparseV
+     *            the new sparse vector
+     */
+    public void setSparseVector(SparseVector sparseV) {
         this.vector = sparseV;
     }
 
-    public String getBody()
-    {
+    /**
+     * Gets the body.
+     *
+     * @return the body
+     */
+    public String getBody() {
         return body;
     }
-    
-    public void setBody(String body){
+
+    /**
+     * Sets the body.
+     *
+     * @param body
+     *            the new body
+     */
+    public void setBody(String body) {
         this.body = body;
     }
-    
-//    public long getTimeStamp()
-//    {
-//        return timestamp;
-//    }
 
-    public SparseVector getSparseVector()
-    {
+    /**
+     * Gets the sparse vector.
+     *
+     * @return the sparse vector
+     */
+    public SparseVector getSparseVector() {
         return vector;
     }
 
-    public boolean hasEmptyVector()
-    {
+    /**
+     * Checks for empty vector.
+     *
+     * @return true, if successful
+     */
+    public boolean hasEmptyVector() {
         return vector == null;
     }
 
-    public long getID()
-    {
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     */
+    public long getID() {
         return ID;
     }
-    
-    public void setId(long tweetId)
-    {
+
+    /**
+     * Sets the id.
+     *
+     * @param tweetId
+     *            the new id
+     */
+    public void setId(long tweetId) {
         ID = tweetId;
     }
 }

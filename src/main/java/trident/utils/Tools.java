@@ -23,55 +23,64 @@ import entities.SparseVector;
 import entities.Tweet;
 
 /**
- * Utils class.
+ * Utils class
+ * 
+ * @author Michael Vogiatzis (michaelvogiatzis@gmail.com)
  */
-public class Tools implements Serializable{
-    
-    public Tools()
-    {
-        
+public class Tools implements Serializable {
+
+    /** The Constant serialVersionUID. */
+    private static final long serialVersionUID = 667697161858567314L;
+
+    /**
+     * Instantiates a new tools.
+     */
+    public Tools() {
     }
 
     /**
-     * Reads from file and returns bufferedReader
+     * Reads from file and returns bufferedReader.
+     *
      * @param inputFil
-     * @return
+     *            the input fil
+     * @return the buffered reader
      * @throws FileNotFoundException
+     *             the file not found exception
      */
-    public BufferedReader readFromFile(File inputFil) throws FileNotFoundException
-    {
+    public BufferedReader readFromFile(File inputFil) throws FileNotFoundException {
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(inputFil)));
         return br;
     }
-    
 
     /**
-     * Retrieve the links starting with http:// and return the links along with the tweet
-     * as final element after removing the links.
+     * Retrieve the links starting with http:// and return the links along with the tweet as final element after removing the links.
+     *
      * @param tweet
+     *            the tweet
      * @return The tweet text without links and replies.
      */
-    public String removeLinksAndReplies(String tweet)
-    {
+    public String removeLinksAndReplies(String tweet) {
         while (tweet.contains("http://")) {
             tweet = removeSpecifiedWord(tweet, "http://");
         }
-        
-        while(tweet.contains("@")){
+
+        while (tweet.contains("@")) {
             tweet = removeSpecifiedWord(tweet, "@");
         }
-        
+
         return tweet;
     }
 
     /**
      * Removes the word that starts with startChars from the tweet text.
+     *
      * @param tweet
-     * @param startChars The starting characters of the word you want to remove
+     *            the tweet
+     * @param startChars
+     *            The starting characters of the word you want to remove
      * @return String A String without the words that start with startChars
      */
-    private String removeSpecifiedWord(String tweet, String startChars)
-    {
+    private String removeSpecifiedWord(String tweet, String startChars) {
         String httpLink = "";
         int indexOfHttp = tweet.indexOf(startChars);
         int initialIndex = indexOfHttp;
@@ -82,84 +91,94 @@ public class Tools implements Serializable{
             currChar = tweet.charAt(indexOfHttp);
             httpLink += currChar;
         }
-        //remove http link from tweet
+        // remove http link from tweet
         tweet = (tweet.substring(0, initialIndex) + " " + tweet.substring(indexOfHttp + 1)).trim();
-        //if you want to keep the specified string uncomment the following line
-        //httpLinksAndTweetAtLastIndex.add(httpLink.toLowerCase().trim());    //add httpLink to temporary ArrayList
+        // if you want to keep the specified string uncomment the following line
+        // httpLinksAndTweetAtLastIndex.add(httpLink.toLowerCase().trim()); //add httpLink to temporary ArrayList
         return tweet;
     }
 
     /**
-     * To allow testing this is a version without futures.
-     * Takes an int array of positions and values and returns the int to be used as hash in buckets.
-     * http://stackoverflow.com/questions/4844342/change-bits-value-in-byte
+     * To allow testing this is a version without futures. Takes an int array of positions and values and returns the int to be used as hash
+     * in buckets. http://stackoverflow.com/questions/4844342/change-bits-value-in-byte
+     *
+     * @param dtList
+     *            the dt list
      * @return The smallHash as int.
      */
-    public int computeIntHashAllowsTest(ArrayList<DotProduct> dtList)
-    {
+    public int computeIntHashAllowsTest(ArrayList<DotProduct> dtList) {
         int hash = 0;
 
         for (DotProduct dt : dtList)
-            if (dt.getValue()>=0)
-                hash = hash | (1<< dt.getPosition());
+            if (dt.getValue() >= 0)
+                hash = hash | (1 << dt.getPosition());
 
         return hash;
     }
 
-        /**
+    /**
      * Takes an int array of positions and values and returns the int to be used as hash in buckets.
      * http://stackoverflow.com/questions/4844342/change-bits-value-in-byte
+     *
+     * @param dtList
+     *            the dt list
      * @return The smallHash as int.
      */
-    public int computeIntHash(ArrayList<Future<DotProduct>> dtList)
-    {
+    public int computeIntHash(ArrayList<Future<DotProduct>> dtList) {
         int hash = 0;
-        try{
-        for (Future<DotProduct> dt : dtList)
-            if (dt.get().getValue()>=0)
-                hash = hash | (1<< dt.get().getPosition());
+        try {
+            for (Future<DotProduct> dt : dtList)
+                if (dt.get().getValue() >= 0)
+                    hash = hash | (1 << dt.get().getPosition());
+        } catch (InterruptedException ex) {
+            System.out.println(ex);
+        } catch (ExecutionException ex) {
+            System.out.println(ex);
         }
-        catch (InterruptedException ex) {
-                System.out.println(ex);
-            }
-            catch (ExecutionException ex) {
-                System.out.println(ex);
-            }
 
         return hash;
     }
 
-    /* Constructs the reduced dimension hash from threads that give the position of each bit.
-     * since reduced dimensions hash is e.g. 10001000, then int value should be 2^3 + 2^7
-     * use int as hash representations. maximum k size is therefore 32 as contains(key)
-     * can only use not more than ints.
+    /**
+     * Construct hash with pow.
+     *
+     * @param list
+     *            the list
+     * @return the int
+     */
+    /*
+     * Constructs the reduced dimension hash from threads that give the position of each bit. since reduced dimensions hash is e.g.
+     * 10001000, then int value should be 2^3 + 2^7 use int as hash representations. maximum k size is therefore 32 as contains(key) can
+     * only use not more than ints.
+     * 
      * @param list The list which contains the dot products derived from each thread
+     * 
      * @return The complete hash
      */
-    public int constructHashWithPow(ArrayList<Future<DotProduct>> list)
-    {
+    public int constructHashWithPow(ArrayList<Future<DotProduct>> list) {
         int sum = 0;
         for (Future<DotProduct> future : list) {
             try {
                 if (future.get().getValue() >= 0) {
                     sum += Math.pow(2, future.get().getPosition());
                 }
-            }
-            catch (InterruptedException ex) {
+            } catch (InterruptedException ex) {
                 System.out.println(ex);
-            }
-            catch (ExecutionException ex) {
+            } catch (ExecutionException ex) {
                 System.out.println(ex);
             }
         }
         return sum;
     }
-    
-        /**
-     * Computes the cosine similarity between a possible Neighbour (possibly smaller dimension vector) and a new
-     * Tweet that arrives which might have a bigger vector.
-     * @param possibleNeighbour The old tweet, usually located in bucket.
-     * @param newTweet The new arriving tweet.
+
+    /**
+     * Computes the cosine similarity between a possible Neighbour (possibly smaller dimension vector) and a new Tweet that arrives which
+     * might have a bigger vector.
+     * 
+     * @param possibleNeighbour
+     *            The old tweet, usually located in bucket.
+     * @param newTweet
+     *            The new arriving tweet.
      * @return NearNeighbour The cosine similarity along with the possible neighbour
      */
     public NearNeighbour computeCosineSimilarity(Tweet possibleNeighbour, Tweet newTweet) {
@@ -170,8 +189,8 @@ public class Tools implements Serializable{
         possibleNeighbourVect.getNonZeros(nonZeroIndeces, dblZeroIndeces);
         double dotProductValue = newTweetVect.zDotProduct(possibleNeighbourVect, 0, possibleNeighbourVect.size(), nonZeroIndeces);
 
-        //colt norm2 needs sqrt
-        //here divide by zero will give NaN BUG if vectors are consisted ONLY of 0s !
+        // colt norm2 needs sqrt
+        // here divide by zero will give NaN BUG if vectors are consisted ONLY of 0s !
         Double cosSim = new Double(dotProductValue / getNorm2(possibleNeighbourVect, newTweetVect));
         if (cosSim.isNaN()) {
             System.exit(1);
@@ -182,11 +201,17 @@ public class Tools implements Serializable{
 
     }
 
+    /**
+     * Gets the norm2.
+     *
+     * @param possibleNeighbourVect
+     *            the possible neighbour vect
+     * @param newTweetVect
+     *            the new tweet vect
+     * @return the norm2
+     */
     private double getNorm2(SparseVector possibleNeighbourVect, SparseVector newTweetVect) {
         return possibleNeighbourVect.getEuclidNorm() * newTweetVect.getEuclidNorm();
     }
-
-
-    
 
 }
