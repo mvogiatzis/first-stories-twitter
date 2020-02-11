@@ -16,16 +16,16 @@
 	<repositories>
 		<repository>
 			<id>clojars.org</id>
-			<url>http://clojars.org/repo</url>
+			<url>https://clojars.org/repo</url>
 		</repository>
 		<repository>
 			<id>github-releases</id>
-			<url>http://oss.sonatype.org/content/repositories/github-releases/</url>
+			<url>https://oss.sonatype.org/content/repositories/github-releases/</url>
 		</repository>
 		<repository>
 			<id>twitter4j.org</id>
 			<name>twitter4j.org Repository</name>
-			<url>http://twitter4j.org/maven2</url>
+			<url>https://twitter4j.org/maven2</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
